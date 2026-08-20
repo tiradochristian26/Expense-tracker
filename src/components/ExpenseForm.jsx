@@ -9,7 +9,7 @@ const ExpenseForm = ({expenses,setExpenses}) => {
     const [category,setCategory] = useState('food')
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(amount)
+     
 
         if(description.trim() === '' || Number.isNaN(amount) || amount <= 0) {
             alert('invalid')
@@ -58,7 +58,7 @@ const ExpenseForm = ({expenses,setExpenses}) => {
                  <div className="flex flex-col ">
                 <label htmlFor="amount" className="text-gray-600 text-md">Amount (&#8369;)</label>
                 <input 
-                onChange={e =>setAmount(e.target.value)}
+                onChange={e =>setAmount(e.target.valueAsNumber)}
                 value={Number.isNaN(amount) ? '' : amount}
                 type="number" 
                 id="amount"
