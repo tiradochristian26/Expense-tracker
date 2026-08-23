@@ -45,18 +45,18 @@ const ExpenseList = ({expenses}) => {
                            className="flex justify-between"
                             >
                          <div>
-                                 <p>{expense.description}</p>
-                                 <p>{expense.category}</p>
+                                 <p className="font-bold"> {expense.description}</p>
+                                 <p className="text-gray-700 border text-center 
+                                 px-2 py-0.5 rounded-xl text-sm">{expense.category}</p>
                              </div>
                            
-                              <p>{expense.amount}</p>
+                              <p className="font-bold">₱{expense.amount}</p>
                                     
                             </li>
                         ))}
                     </ul>
                    ):(
                     <p className="text-gray-500 text-center w-full font-medium">
-
                     No records yet
                     </p>
                    )}

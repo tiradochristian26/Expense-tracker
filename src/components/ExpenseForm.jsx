@@ -10,12 +10,10 @@ const ExpenseForm = ({expenses,setExpenses}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
      
-
         if(description.trim() === '' || Number.isNaN(amount) || amount <= 0) {
             alert('invalid')
             return;
          }
-         
          const id = crypto.randomUUID()
          const values = {
             id,
@@ -27,7 +25,6 @@ const ExpenseForm = ({expenses,setExpenses}) => {
          setDescription('')
          setAmount(NaN)
          setCategory('food')
-
         
     }
     return (    
@@ -91,7 +88,7 @@ const ExpenseForm = ({expenses,setExpenses}) => {
                      <Button type={'submit'}
                             content={'add'}
                             color={'bg-blue-500'}  
-                            textColor={'white'}
+                            textColor={'text-white'}
                             Icon={<Plus 
                                 size={15}
                             />}
