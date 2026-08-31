@@ -2,29 +2,37 @@
 import { useState } from "react";
 import Button from "../common/Button";
 import { Plus } from "lucide-react";
-
+import { newExpenseItem } from "../services/new_expense_item";
 const ExpenseForm = ({expenses,setExpenses}) => {
     const [description,setDescription] = useState('');
     const [amount,setAmount] = useState(NaN);
     const [category,setCategory] = useState('food')
-    const handleSubmit = (e) => {
+    const [isSubmitting,setIsSubmitting] = useState(false)
+    const handleSubmit = async (e) => {
         e.preventDefault()
-     
         if(description.trim() === '' || Number.isNaN(amount) || amount <= 0) {
             alert('invalid')
             return;
          }
-         const id = crypto.randomUUID()
-         const values = {
-            id,
+         const item = {
             description,
             amount,
             category
-         }
-         setExpenses([...expenses,values])
+         }  
+         try {
+            setIsSubmitting(true)
+           const newItem = await newExpenseItem(item)
+           setExpenses([...expenses,newItem])
          setDescription('')
          setAmount(NaN)
          setCategory('food')
+         } catch (error) { 
+            alert(error.message)
+            return;
+         }finally{
+            setIsSubmitting(false)
+         }
+     
         
     }
     return (    
@@ -85,18 +93,17 @@ const ExpenseForm = ({expenses,setExpenses}) => {
 
             </select>
                     </div>      
-                     <Button type={'submit'}
-                            content={'add'}
-                            color={'bg-blue-500'}  
+                     <Button type='submit'
+                            content='add'
+                            color={isSubmitting? 'bg-blue-300': 'bg-blue-500'}  
                             textColor={'text-white'}
+                            disabled={isSubmitting}
                             Icon={<Plus 
-                                size={15}
+                            size={15}
+                                
                             />}
                         />
                 </div>
-             
-
-                
             </form>
         </div>
     )

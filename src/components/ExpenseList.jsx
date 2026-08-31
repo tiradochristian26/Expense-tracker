@@ -1,13 +1,9 @@
 import Button from "../common/Button";
 const ExpenseList = ({expenses}) => {  
-
-
-
     return (
       
           <div className="border border-gray-200 rounded-xl m-2 p-4  min-h-[50vh]">
-
-          <div className="flex justify-around">
+          <div className="flex justify-around items-center">
             <h1 className="text-gray-950 font-medium" >Recent Expense</h1>
             <div className="flex gap-2">
                     <Button 
