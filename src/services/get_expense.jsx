@@ -1,6 +1,5 @@
 
 const url = import.meta.env.VITE_API_URL;
-
 const getExpense = async () => {
     const response = await fetch(url)
     if(!response.ok){

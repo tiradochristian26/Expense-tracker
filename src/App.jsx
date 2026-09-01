@@ -30,6 +30,7 @@ const App = () => {
       />
       <ExpenseList 
       expenses={expenses}
+      setExpenses={setExpenses}
       /> </>}
     
       

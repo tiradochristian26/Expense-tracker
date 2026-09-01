@@ -1,35 +1,4 @@
 {
-  "expenses": [
-    {
-      "id": "1",
-      "description": "Lunch",
-      "category": "food",
-      "amount": 150
-    },
-    {
-      "id": "2",
-      "description": "Coffee",
-      "category": "food",
-      "amount": 100
-    },
-    {
-      "description": "Grab",
-      "amount": 1000,
-      "category": "transportation",
-      "id": "ZvpqFLT6rHI"
-    },
-    {
-      "description": "grocery",
-      "amount": 122,
-      "category": "food",
-      "id": "sElK1We3BkM"
-    },
-    {
-      "description": "grab",
-      "amount": 233,
-      "category": "transportation",
-      "id": "-jtQ3HHNvE0"
-    }
-  ],
+  "expenses": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

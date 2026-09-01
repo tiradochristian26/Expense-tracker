@@ -32,8 +32,6 @@ const ExpenseForm = ({expenses,setExpenses}) => {
          }finally{
             setIsSubmitting(false)
          }
-     
-        
     }
     return (    
         <div className="bg-white border border-gray-200 rounded-xl m-2 p-4 ">
