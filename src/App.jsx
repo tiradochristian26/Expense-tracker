@@ -26,14 +26,12 @@ const App = () => {
     <>
       {!isLoading && err && <p className="text-red-500 text-center">{err}</p> }
       {isLoading  && !err &&( <Loader/>)}
-      {!isLoading && !err && <> <ExpenseForm setExpenses={setExpenses} expenses={expenses}
-      />
+      {!isLoading && !err && <> 
+      <ExpenseForm setExpenses={setExpenses} expenses={expenses}/>
       <ExpenseList 
       expenses={expenses}
       setExpenses={setExpenses}
       /> </>}
-    
-      
 
     </>
   )

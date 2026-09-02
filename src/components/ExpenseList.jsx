@@ -1,14 +1,28 @@
 import Button from "../common/Button";
 import { Trash2 } from "lucide-react";
 import { deleteItem } from "../services/delete_item";
+import { useState } from "react";
 const ExpenseList = ({ expenses, setExpenses }) => {
+const [idToDelete,setIdToDelete] = useState(new Set())
+const [deleteError,setDeleteError] = useState(null)
+
     const handleDelete = async (id) => {
+        setIdToDelete(prev => {
+            const next = new Set(prev)
+            next.add(id)
+            return next
+        })
         try {
-            const item = await (deleteItem(id))
-            setExpenses(prev => prev.filter(expense => expense.id !== item.id
-            ))
-        } catch (error) {
-            console.log(error.message)
+             await (deleteItem(id))
+            setExpenses(prev => prev.filter(expense => expense.id !== id ))
+        } catch (error) { 
+            setDeleteError(error.message)
+        }finally {
+              setIdToDelete(prev => {
+            const next = new Set(prev)
+            next.delete(id)
+            return next
+        })
         }
     }
     return (
@@ -44,10 +58,13 @@ const ExpenseList = ({ expenses, setExpenses }) => {
             </div>
 
             <div>
+                    {deleteError && <p className="text-red-600">{deleteError}</p>}
                 {expenses.length > 0 ? (
                     <ul className="space-y-3">
-                        {expenses.map((expense) => (
-                            <li key={expense.id} className="flex justify-between">
+                        {expenses.map((expense) => {
+                            const isDeleting = idToDelete.has(expense.id)
+                            return (
+                                <li key={expense.id} className="flex justify-between">
                                 <div>
                                     <p className="font-medium  text-gray-950"> {expense.description}</p>
                                     <p
@@ -59,19 +76,21 @@ const ExpenseList = ({ expenses, setExpenses }) => {
                                 </div>
                                 <div className="flex items-center gap-6">
                                     <p className="font-medium text-gray-950">₱{expense.amount}</p>
-
                                     <div >
                                         <button
+                                            disabled = {isDeleting}
                                             onClick={() => handleDelete(expense.id)}
                                             className="border p-1 rounded-md border-gray-300 cursor-pointer"
-                                        ><Trash2
+                                        >{isDeleting ? 'Deleting' : <Trash2
                                                 size={16}
                                                 color="red"
-                                            /></button>
+                                            />}</button>    
                                     </div>
                                 </div>
                             </li>
-                        ))}
+                            )
+                            
+})}
                     </ul>
                 ) : (
                     <p className="text-gray-500 text-center w-full font-medium">

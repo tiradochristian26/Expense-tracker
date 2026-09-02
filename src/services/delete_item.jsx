@@ -11,7 +11,4 @@ const url = import.meta.env.VITE_API_URL;
         const error = new Error(`${res.status} Something went wrong`)
         throw error
     }
-    console.log(res.json())
-    return res.json()
-
 }
